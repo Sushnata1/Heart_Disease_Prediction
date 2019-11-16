@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         training_set.setClassIndex(4);
         /*
         try {
-            cls = (Classifier) weka.core.SerializationHelper.read(getAssets().open("heart.model"));
+
         }
         catch (Exception e){}*/
         createNotificationChannel();
@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
         try
         {
 
+            cls = (Classifier) weka.core.SerializationHelper.read(getAssets().open("heart.model"));
             Instance instance = new DenseInstance(4);
             instance.setValue(attrib_age,age);
             instance.setValue(attrib_sex,sex);
@@ -83,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
             training_set.add(instance);
             double target=1.0;
-            //double target = cls.classifyInstance(training_set.instance(0));
+            target = cls.classifyInstance(training_set.instance(0));
             String s = "hello " + blood_pressure + " " + pulse_rate + " " + age + " " + sex+" target "+target;
             Toast t = Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG);
             t.show();
